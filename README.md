@@ -6,9 +6,12 @@ Pile is a desktop app for reflective journaling. It's about simplicity, keeping 
 
 ## Getting started
 
-1. Download the latest version of Pile by going to the [Pile releases page](https://github.com/UdaraJay/Pile/releases/).
-2. On macOS Open the `.zip` or `.dmg` file and drag the application to the destination of your choice (_optional_), such as your `Applications/` folder. On Windows, use the `.exe` to install.
-3. Finally open the application, create a `New Pile`, and start your reflective journey.
+```bash
+$ npm install --legacy-peer-deps
+$ npx ts-node ./.erb/scripts/clean.js dist 
+$ npm run build 
+$ npx electron-builder build --mac --arm64 --publish never
+```
 
 ### AI reflections (requires OpenAI API access, or Ollama for local AI)
 
