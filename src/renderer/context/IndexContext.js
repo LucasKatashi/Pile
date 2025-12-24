@@ -89,7 +89,7 @@ export const IndexContextProvider = ({ children }) => {
     return window.electron.ipc.invoke('index-vector-search', query, topN);
   }, []);
 
-  const loadLatestThreads = useCallback(async (count = 25) => {
+  const loadLatestThreads = useCallback(async (count = 14) => {
     const items = await search('');
     const latest = items.slice(0, count);
 
@@ -97,7 +97,7 @@ export const IndexContextProvider = ({ children }) => {
     const latestThreadsAsText = await getThreadsAsText(entryFilePaths);
 
     setLatestThreads(latestThreadsAsText);
-  }, []);
+  }, [search, getThreadsAsText]);
 
   const indexContextValue = {
     index,

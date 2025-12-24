@@ -1,4 +1,4 @@
-import { useState, useCallback, useMemo } from 'react';
+import { useState, useCallback, useMemo, useEffect } from 'react';
 import { useAIContext } from 'renderer/context/AIContext';
 import { useIndexContext } from 'renderer/context/IndexContext';
 
@@ -24,7 +24,7 @@ const useChat = () => {
       },
       {
         role: 'system',
-        content: `Here are the 10 latest journal entries from the user: \n\n${latestThreads}`,
+        content: `Here are the 14 latest journal entries from the user: \n\n${latestThreads}`,
       },
       { role: 'system', content: 'The user starts the conversation:' },
     ],
@@ -32,6 +32,11 @@ const useChat = () => {
   );
 
   const [messages, setMessages] = useState(STARTER);
+
+  // Sync messages with STARTER when latestThreads loads asynchronously
+  useEffect(() => {
+    setMessages(STARTER);
+  }, [STARTER]);
 
   const resetMessages = useCallback(() => setMessages(STARTER), [STARTER]);
 

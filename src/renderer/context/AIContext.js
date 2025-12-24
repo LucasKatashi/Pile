@@ -124,14 +124,14 @@ export const AIContextProvider = ({ children }) => {
   );
 
   const checkApiKeyValidity = async () => {
-    // TODO: Add regex for OpenAPI and Ollama API keys
-    const key = await window.electron.ipc.invoke('get-ai-key');
-    
-    if (key !== null) {
+    // Ollama doesn't require an API key
+    if (pileAIProvider === 'ollama') {
       return true;
     }
 
-    return false;
+    // For other providers, check if key exists
+    const key = await window.electron.ipc.invoke('get-ai-key');
+    return key !== null;
   }
 
   const AIContextValue = {
